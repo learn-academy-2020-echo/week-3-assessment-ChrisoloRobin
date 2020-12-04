@@ -8,7 +8,7 @@
 // src/App.js
 
 import React, { Component } from 'react'
-// 1)
+// 1)this loads a class called Dice from a folder called Dice
 import Dice from './Dice'
 import Log from './Log'
 
@@ -21,10 +21,10 @@ import dice5 from '../assets/dice-5.png'
 import dice6 from '../assets/dice-6.png'
 
 class Board extends Component{
-  // 2)
+  // 2)loads constructor & props which allow us to pass components through our application
   constructor(props){
     super(props)
-    // 3)
+    // 3)create a dynatic static for us to reference
     this.state = {
       rollImages: [dice1, dice2, dice3, dice4, dice5, dice6],
       currentPic: dice,
@@ -33,23 +33,24 @@ class Board extends Component{
   }
 
   handleRoll = () => {
-    // 4)
+    // 4)this is the static start state of the dice
     let { rollImages, diceLog } = this.state
-    // 5)
+    // 5)this funcation calculates the random dice roll
     let randomNum = Math.ceil(Math.random() * rollImages.length)
     let newRoll = rollImages[randomNum]
-    // 6)
+    // 6)this is the state of the new after calculating a new value
     this.setState({ currentPic: newRoll, diceLog: [... diceLog, newRoll] })
   }
 
-  // 7)
+  // 7)this is the output of the application
   render(){
     const { currentPic, diceLog } = this.state
     return(
       <div id="board-container">
-        // 8)
+        // 8)this is where the "game" is displayed - dice seen by user
+        // also wehere we reference dice mechanic
         <Dice
-          // 9)
+          // 9) this is a reference function in which the roll is displayed as well as the coresponding side of the dice
           roll={ this.handleRoll }
           currentPic={ currentPic }
         />
@@ -61,5 +62,5 @@ class Board extends Component{
   }
 }
 
-// 10)
+// 10) this loads the application through react and outputs the information above
 export default Board
